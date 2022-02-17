@@ -6,9 +6,10 @@ int main(){
     string line = "";
     bool read = false;
     bool write = false;
+    bool deleteNote = false;
 
     while(true){
-        cout << "Hi there, do you want to read or write a note: ";
+        cout << "Hi there, do you want to read, write, or delete a note: ";
         getline(cin, line);
 
         if(line == "read"){
@@ -16,6 +17,9 @@ int main(){
             break;
         } else if (line == "write") {
             write = true;
+            break;
+        } else if (line == "delete"){
+            deleteNote = true;
             break;
         } else {
             cout << "Sorry, incorrect input. Try again." << endl;
@@ -54,8 +58,15 @@ int main(){
             } else {
                 cout << "I'm sorry, that is an invalid option. Try again." << endl;
             }
-        }
+        } 
+
+        Notes note;
+        string output = note.getNote("happy");
         
+    } else if(write){
+
+    } else if(deleteNote){
+
     }
     
 }
