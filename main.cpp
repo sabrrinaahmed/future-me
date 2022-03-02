@@ -3,6 +3,8 @@
 using namespace std;
 
 int main(){
+    Notes note;
+    note.loadNotes();
     string line = "";
     bool read = false;
     bool write = false;
@@ -60,8 +62,8 @@ int main(){
             }
         } 
 
-        Notes note;
         string output = note.getNote("happy");
+        cout << output << endl << endl;
         
     } else if(write){
 

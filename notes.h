@@ -2,6 +2,7 @@
 #include <string>
 #include <time.h>
 #include <stdlib.h>
+#include <fstream>
 using namespace std;
 
 class Notes {
@@ -12,6 +13,52 @@ private:
     vector<string> depressed;
 
 public:
+    void loadNotes(){
+        ifstream happyFile("happy.txt");
+        ifstream sadFile("sad.txt");
+        ifstream angryFile("angry.txt");
+        ifstream depressedFile("depressed.txt");
+
+        while(!happyFile.eof()){
+            string line;
+            getline(happyFile, line);
+            if(line == ""){
+                continue;
+            }
+            happy.push_back(line);
+        }
+        happyFile.close();
+
+        while(!sadFile.eof()){
+            string line;
+            getline(sadFile, line);
+            if(line == ""){
+                continue;
+            }
+            sad.push_back(line);
+        }
+        sadFile.close();
+
+        while(!angryFile.eof()){
+            string line;
+            getline(angryFile, line);
+            if(line == ""){
+                continue;
+            }
+            angry.push_back(line);
+        }
+        angryFile.close();
+
+        while(!depressedFile.eof()){
+            string line;
+            getline(depressedFile, line);
+            if(line == ""){
+                continue;
+            }
+            depressed.push_back(line);
+        }
+        depressedFile.close();
+    }
     
     string getNote(string type){
         if(empty(type)){
@@ -27,11 +74,13 @@ public:
             }
         }
 
-        vector<string> vect = getVectorByType(type);
-        srand(time(NULL));
-        int number = rand() % vect.size();
-        cout << number << endl;
-        return "";
+        string result;
+        if(type == "happy"){
+            result = happy[0];
+            //happy.erase(happy.begin());
+        }
+        
+        return result;
     }
     
     void deleteNote(){
@@ -46,6 +95,9 @@ public:
         getline(cin, input);
         if(type == "happy"){
             happy.push_back(input);
+            ofstream happyFile("happy.txt");
+            happyFile << endl << input;
+            happyFile.close();
         } else if(type == "sad"){
             sad.push_back(input);
         } else if(type == "angry"){
