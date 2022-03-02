@@ -60,6 +60,53 @@ public:
         depressedFile.close();
     }
     
+    void updateFiles(){
+        
+        ofstream happyFile;
+        happyFile.open("happy.txt", std::ofstream::out | std::ofstream::trunc);
+        if(happy.size() > 0){
+            happyFile << happy[0];
+            for(int i = 1; i < happy.size(); i++){
+                happyFile << endl << happy[i];
+            }
+        }
+        happyFile.close();
+
+        ofstream sadFile;
+        sadFile.open("sad.txt", std::ofstream::out | std::ofstream::trunc);
+        if(sad.size() > 0){
+            sadFile << sad[0];
+            for(int i = 1; i < sad.size(); i++){
+                sadFile << endl << sad[i];
+            }
+        }
+        sadFile.close();
+
+        if(angry.size() > 0){
+            ofstream angryFile;
+            angryFile.open("angry.txt", std::ofstream::out | std::ofstream::trunc);
+            if(angry.size() > 0){
+            angryFile << angry[0];
+            for(int i = 1; i < angry.size(); i++){
+                angryFile << endl << angry[i];
+            }
+        }
+            angryFile.close();
+        }
+
+        if(depressed.size() > 0){
+            ofstream depressedFile;
+            depressedFile.open("depressed.txt", std::ofstream::out | std::ofstream::trunc);
+            if(depressed.size() > 0){
+            depressedFile << depressed[0];
+            for(int i = 1; i < depressed.size(); i++){
+                depressedFile << endl << depressed[i];
+            }
+        }
+            depressedFile.close();
+        }
+    }
+    
     string getNote(string type){
         if(empty(type)){
             string line;
@@ -77,16 +124,52 @@ public:
         string result;
         if(type == "happy"){
             result = happy[0];
-            //happy.erase(happy.begin());
+            happy.erase(happy.begin());
+            cout << happy.size() << endl;
+        } else if (type == "sad"){
+            result = sad[0];
+            sad.erase(sad.begin());
+        } else if (type == "angry"){
+            result = angry[0];
+            angry.erase(angry.begin());
+        } else if (type == "depressed"){
+            result = depressed[0];
+            depressed.erase(depressed.begin());
         }
         
         return result;
     }
     
     void deleteNote(){
-        cout << "What type of note do you want to delete? [happy, sad, angry, depressed]: ";
+        cout << "Your options: " << endl;
+        cout << "Happy: 0" << endl;
+        cout << "Sad: 1" << endl;
+        cout << "Angry: 2" << endl;
+        cout << "Depressed: 3" << endl;
+        cout << "Where do you want to delete from: ";
         string input;
         getline(cin, input);
+
+        cout << endl << endl;
+        if(input == "0"){
+            for(int i = 0; i < happy.size(); i++){
+                cout << i << ": " << happy[i] << endl;
+            }
+            cout << "Which would you like to delete? ";
+            int del;
+            cin >> del;
+            happy.erase(happy.begin()+del, happy.begin()+del+1);
+
+        } else if(input == "1"){
+
+        } else if (input == "2"){
+            
+        } else if (input == "3"){
+
+        }
+
+        cout << endl << "Note has been deleted." << endl;
+        cout << happy.size() << endl;
     }
 
     void writeNote(string type){

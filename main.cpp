@@ -30,73 +30,69 @@ int main(){
     
     cout << endl;
 
-    bool happy = false;
-    bool sad = false;
-    bool angry = false;
-    bool depressed = false;
+    string output;
     if(read){
         while(true){
+            
             cout << "Your options: " << endl;
-            cout << "Happy : 1" << endl;
-            cout << "Sad : 2" << endl;
-            cout << "Angry : 3" << endl;
-            cout << "Depressed : 4" << endl;
+            cout << "Happy: 1" << endl;
+            cout << "Sad: 2" << endl;
+            cout << "Angry: 3" << endl;
+            cout << "Depressed: 4" << endl;
             cout << "What do you want to read: ";
             getline(cin, line);
             cout << endl;
 
             if(line == "1"){
-                happy = true;
+                output = note.getNote("happy");
                 break;
             } else if (line == "2"){
-                sad = true;
+                output = note.getNote("sad");
                 break;
             } else if (line == "3") {
-                angry = true;
+                output = note.getNote("angry");
                 break;
             } else if (line == "4") {
-                depressed = true;
+                output = note.getNote("depressed");
                 break;
             } else {
                 cout << "I'm sorry, that is an invalid option. Try again." << endl;
             }
         } 
 
-        string output = note.getNote("happy");
         cout << output << endl << endl;
         
     } else if(write){
         while(true){
             cout << "Your options: " << endl;
-            cout << "Happy : 1" << endl;
-            cout << "Sad : 2" << endl;
-            cout << "Angry : 3" << endl;
-            cout << "Depressed : 4" << endl;
+            cout << "Happy: 1" << endl;
+            cout << "Sad: 2" << endl;
+            cout << "Angry: 3" << endl;
+            cout << "Depressed: 4" << endl;
             cout << "What do you want to write: ";
             getline(cin, line);
             cout << endl;
 
             if(line == "1"){
-                happy = true;
+                note.writeNote("happy");
                 break;
             } else if (line == "2"){
-                sad = true;
+                note.writeNote("sad");
                 break;
             } else if (line == "3") {
-                angry = true;
+                note.writeNote("angry");
                 break;
             } else if (line == "4") {
-                depressed = true;
+                note.writeNote("depressed");
                 break;
             } else {
                 cout << "I'm sorry, that is an invalid option. Try again." << endl;
             }
         }
-        note.writeNote("happy");
 
     } else if(deleteNote){
-
+        note.deleteNote();
     }
 
-    
+    note.updateFiles();
 }

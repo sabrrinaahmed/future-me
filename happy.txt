@@ -1,3 +1,0 @@
-check check
-checking again
-program is working
