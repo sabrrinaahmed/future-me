@@ -95,7 +95,8 @@ public:
         getline(cin, input);
         if(type == "happy"){
             happy.push_back(input);
-            ofstream happyFile("happy.txt");
+            fstream happyFile;
+            happyFile.open("happy.txt", std::ios_base::app);
             happyFile << endl << input;
             happyFile.close();
         } else if(type == "sad"){
@@ -105,6 +106,7 @@ public:
         } else if(type == "depressed"){
             depressed.push_back(input);
         }
+        cout << endl;
         cout << "Your note has been saved." << endl;
     }
 

@@ -66,9 +66,37 @@ int main(){
         cout << output << endl << endl;
         
     } else if(write){
+        while(true){
+            cout << "Your options: " << endl;
+            cout << "Happy : 1" << endl;
+            cout << "Sad : 2" << endl;
+            cout << "Angry : 3" << endl;
+            cout << "Depressed : 4" << endl;
+            cout << "What do you want to write: ";
+            getline(cin, line);
+            cout << endl;
+
+            if(line == "1"){
+                happy = true;
+                break;
+            } else if (line == "2"){
+                sad = true;
+                break;
+            } else if (line == "3") {
+                angry = true;
+                break;
+            } else if (line == "4") {
+                depressed = true;
+                break;
+            } else {
+                cout << "I'm sorry, that is an invalid option. Try again." << endl;
+            }
+        }
+        note.writeNote("happy");
 
     } else if(deleteNote){
 
     }
+
     
 }
