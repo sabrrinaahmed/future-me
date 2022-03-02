@@ -161,15 +161,35 @@ public:
             happy.erase(happy.begin()+del, happy.begin()+del+1);
 
         } else if(input == "1"){
+            for(int i = 0; i < sad.size(); i++){
+                cout << i << ": " << sad[i] << endl;
+            }
+            cout << "Which would you like to delete? ";
+            int del;
+            cin >> del;
+            sad.erase(sad.begin()+del, sad.begin()+del+1);
 
         } else if (input == "2"){
+            for(int i = 0; i < angry.size(); i++){
+                cout << i << ": " << angry[i] << endl;
+            }
+            cout << "Which would you like to delete? ";
+            int del;
+            cin >> del;
+            angry.erase(angry.begin()+del, angry.begin()+del+1);
             
         } else if (input == "3"){
+            for(int i = 0; i < depressed.size(); i++){
+                cout << i << ": " << depressed[i] << endl;
+            }
+            cout << "Which would you like to delete? ";
+            int del;
+            cin >> del;
+            depressed.erase(depressed.begin()+del, depressed.begin()+del+1);
 
         }
 
         cout << endl << "Note has been deleted." << endl;
-        cout << happy.size() << endl;
     }
 
     void writeNote(string type){
@@ -184,10 +204,22 @@ public:
             happyFile.close();
         } else if(type == "sad"){
             sad.push_back(input);
+            fstream sadFile;
+            sadFile.open("sad.txt", std::ios_base::app);
+            sadFile << endl << input;
+            sadFile.close();
         } else if(type == "angry"){
             angry.push_back(input);
+            fstream angryFile;
+            angryFile.open("angry.txt", std::ios_base::app);
+            angryFile << endl << input;
+            angryFile.close();
         } else if(type == "depressed"){
             depressed.push_back(input);
+            fstream depressedFile;
+            depressedFile.open("depressed.txt", std::ios_base::app);
+            depressedFile << endl << input;
+            depressedFile.close();
         }
         cout << endl;
         cout << "Your note has been saved." << endl;
