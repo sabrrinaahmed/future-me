@@ -107,50 +107,61 @@ public:
         }
     }
     
-    string getNote(string type){
+    string getNote(){
+        string type;
+        prompt();
+        cout << "What do you want to read: ";
+        getline(cin, type);
+        cout << endl;
+
+        while(type != "0" || type != "1" || type != "2" || type != "3"){
+            cout << "I'm sorry, that is an invalid option. Try again." << endl;
+            prompt();
+            cout << "What do you want to read: ";
+            getline(cin, type);
+            cout << endl;
+        }
+
+        string result;
         if(empty(type)){
             string line;
             cout << "There are currently no notes in " << type << "." << endl;
             cout << "Do you want to write a note into it [Y, N]:  ";
             getline(cin, line);
             if(line == "Y"){
-                writeNote(type);
+                writeNote();
+                result = "write";
             } else if (line == "N"){
+                cout << endl;
                 cout << "Okay, see you soon.";
                 exit(0);
             }
-        }
-
-        string result;
-        if(type == "happy"){
-            result = happy[0];
-            happy.erase(happy.begin());
-            cout << happy.size() << endl;
-        } else if (type == "sad"){
-            result = sad[0];
-            sad.erase(sad.begin());
-        } else if (type == "angry"){
-            result = angry[0];
-            angry.erase(angry.begin());
-        } else if (type == "depressed"){
-            result = depressed[0];
-            depressed.erase(depressed.begin());
+        } else {
+            if(type == "happy"){
+                result = happy[0];
+                happy.erase(happy.begin());
+            } else if (type == "sad"){
+                result = sad[0];
+                sad.erase(sad.begin());
+            } else if (type == "angry"){
+                result = angry[0];
+                angry.erase(angry.begin());
+            } else if (type == "depressed"){
+                result = depressed[0];
+                depressed.erase(depressed.begin());
+            }
         }
         
         return result;
     }
     
     void deleteNote(){
-        cout << "Your options: " << endl;
-        cout << "Happy: 0" << endl;
-        cout << "Sad: 1" << endl;
-        cout << "Angry: 2" << endl;
-        cout << "Depressed: 3" << endl;
+        prompt();
         cout << "Where do you want to delete from: ";
         string input;
         getline(cin, input);
 
-        cout << endl << endl;
+        cout << endl;
         if(input == "0"){
             for(int i = 0; i < happy.size(); i++){
                 cout << i << ": " << happy[i] << endl;
@@ -192,37 +203,50 @@ public:
         cout << endl << "Note has been deleted." << endl;
     }
 
-    void writeNote(string type){
-        cout << "Start writing: ";
-        string input;
-        getline(cin, input);
-        if(type == "happy"){
-            happy.push_back(input);
-            fstream happyFile;
-            happyFile.open("happy.txt", std::ios_base::app);
-            happyFile << endl << input;
-            happyFile.close();
-        } else if(type == "sad"){
-            sad.push_back(input);
-            fstream sadFile;
-            sadFile.open("sad.txt", std::ios_base::app);
-            sadFile << endl << input;
-            sadFile.close();
-        } else if(type == "angry"){
-            angry.push_back(input);
-            fstream angryFile;
-            angryFile.open("angry.txt", std::ios_base::app);
-            angryFile << endl << input;
-            angryFile.close();
-        } else if(type == "depressed"){
-            depressed.push_back(input);
-            fstream depressedFile;
-            depressedFile.open("depressed.txt", std::ios_base::app);
-            depressedFile << endl << input;
-            depressedFile.close();
+    void writeNote(){
+        while(true){
+            string line;
+            prompt();
+            cout << "What do you want to write: ";
+            getline(cin, line);
+            cout << endl;
+
+            while(line != "0" || line != "1" || line != "2" || line != "3"){
+                cout << "I'm sorry, that is an invalid option. Try again." << endl << endl;
+                prompt();
+                cout << "What do you want to write: ";
+                getline(cin, line);
+                cout << endl;
+            }
+
+            cout << "Start writing: ";
+            string input;
+            getline(cin, input);
+
+            if(line == "0"){
+                happy.push_back(input);
+
+            } else if(line == "1"){
+                sad.push_back(input);
+                
+            } else if(line == "2"){
+                angry.push_back(input);
+                
+            } else if(line == "3"){
+                depressed.push_back(input);
+                
+            }
+            cout << endl << "Your note has been saved." << endl;
+
+            cout << endl << "Do you want to read, write, or delete another note? [Y,N] ";
+            getline(cin, line);
+            if(line == "N"){
+                break;
+            } else {
+
+            }
+
         }
-        cout << endl;
-        cout << "Your note has been saved." << endl;
     }
 
     vector<string> getVectorByType(string type){
@@ -243,5 +267,36 @@ public:
             return true;
         }
         return false;
+    }
+
+    void prompt(){
+        cout << "Your options: " << endl;
+        cout << "Happy: 0" << endl;
+        cout << "Sad: 1" << endl;
+        cout << "Angry: 2" << endl;
+        cout << "Depressed: 3" << endl;
+    }
+
+    void start(){
+        while(true){
+            string line;
+            cout << "Hi there, do you want to read, write, or delete a note: ";
+            getline(cin, line);
+
+            if(line == "read"){
+                getNote();
+                break;
+            } else if (line == "write") {
+                writeNote();
+                break;
+            } else if (line == "delete"){
+                deleteNote();
+                break;
+            } else {
+                cout << "Sorry, incorrect input. Try again." << endl;
+            }
+        }
+        cout << endl;
+
     }
 };
