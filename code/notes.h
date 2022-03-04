@@ -14,10 +14,10 @@ private:
 
 public:
     void loadNotes(){
-        ifstream happyFile("happy.txt");
-        ifstream sadFile("sad.txt");
-        ifstream angryFile("angry.txt");
-        ifstream depressedFile("depressed.txt");
+        ifstream happyFile("../notes/happy.txt");
+        ifstream sadFile("../notes/sad.txt");
+        ifstream angryFile("../notes/angry.txt");
+        ifstream depressedFile("../notes/depressed.txt");
 
         while(!happyFile.eof()){
             string line;
@@ -28,6 +28,7 @@ public:
             happy.push_back(line);
         }
         happyFile.close();
+
 
         while(!sadFile.eof()){
             string line;
@@ -63,7 +64,7 @@ public:
     void updateFiles(){
         
         ofstream happyFile;
-        happyFile.open("happy.txt", std::ofstream::out | std::ofstream::trunc);
+        happyFile.open("../notes/happy.txt", std::ofstream::out | std::ofstream::trunc);
         if(happy.size() > 0){
             happyFile << happy[0];
             for(int i = 1; i < happy.size(); i++){
@@ -73,7 +74,7 @@ public:
         happyFile.close();
 
         ofstream sadFile;
-        sadFile.open("sad.txt", std::ofstream::out | std::ofstream::trunc);
+        sadFile.open("../notes/sad.txt", std::ofstream::out | std::ofstream::trunc);
         if(sad.size() > 0){
             sadFile << sad[0];
             for(int i = 1; i < sad.size(); i++){
@@ -84,7 +85,7 @@ public:
 
         if(angry.size() > 0){
             ofstream angryFile;
-            angryFile.open("angry.txt", std::ofstream::out | std::ofstream::trunc);
+            angryFile.open("../notes/angry.txt", std::ofstream::out | std::ofstream::trunc);
             if(angry.size() > 0){
             angryFile << angry[0];
             for(int i = 1; i < angry.size(); i++){
@@ -96,7 +97,7 @@ public:
 
         if(depressed.size() > 0){
             ofstream depressedFile;
-            depressedFile.open("depressed.txt", std::ofstream::out | std::ofstream::trunc);
+            depressedFile.open("../notes/depressed.txt", std::ofstream::out | std::ofstream::trunc);
             if(depressed.size() > 0){
             depressedFile << depressed[0];
             for(int i = 1; i < depressed.size(); i++){
@@ -166,6 +167,10 @@ public:
 
         cout << endl;
         if(input == "0"){
+            if(happy.size() == 0){
+                cout << "There are no happy notes to delete." << endl;
+                return;
+            }
             for(int i = 0; i < happy.size(); i++){
                 cout << i << ": " << happy[i] << endl;
             }
@@ -175,6 +180,10 @@ public:
             happy.erase(happy.begin()+del, happy.begin()+del+1);
 
         } else if(input == "1"){
+            if(sad.size() == 0){
+                cout << "There are no sad notes to delete." << endl;
+                return;
+            }
             for(int i = 0; i < sad.size(); i++){
                 cout << i << ": " << sad[i] << endl;
             }
@@ -184,6 +193,10 @@ public:
             sad.erase(sad.begin()+del, sad.begin()+del+1);
 
         } else if (input == "2"){
+            if(angry.size() == 0){
+                cout << "There are no angry notes to delete." << endl;
+                return;
+            }
             for(int i = 0; i < angry.size(); i++){
                 cout << i << ": " << angry[i] << endl;
             }
@@ -193,6 +206,10 @@ public:
             angry.erase(angry.begin()+del, angry.begin()+del+1);
             
         } else if (input == "3"){
+            if(depressed.size() == 0){
+                cout << "There are no depressed notes to delete." << endl;
+                return;
+            }
             for(int i = 0; i < depressed.size(); i++){
                 cout << i << ": " << depressed[i] << endl;
             }
